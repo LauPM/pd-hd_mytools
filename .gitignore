@@ -1,3 +1,10 @@
+# Temporary files
+tmp/* 
+*.txt
+*.png
+*.html
+*.root
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
