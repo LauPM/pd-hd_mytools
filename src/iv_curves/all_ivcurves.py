@@ -25,7 +25,7 @@ def main(dir):
             continue
         else:
             print('\033[92m'+ 'New! Analysing '+folder+ '\033[0m')
-            os.system(f'python3 ../../PDS/scripts/iv_analysis.py --dir "{dir}/{folder}" > > {dir}/log.txt') # Execute IV_Analyses for each folder
+            os.system(f'python3 ../../../PDS/scripts/iv_analysis.py --dir "{dir}/{folder}" > > {dir}/log.txt') # Execute IV_Analyses for each folder
             list_files = os.listdir(f'{dir}{folder}')
             if "breakdown_output.txt" in list_files:
                 print(f'Output file found!')

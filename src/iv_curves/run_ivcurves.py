@@ -14,7 +14,7 @@ def main(dir):
         else:
             print('\033[92m'+ 'Continue with '+folder+ '\033[0m')
             # os.system(f'python3 iv_analysis.py --dir "{dir}/{folder}"') # Execute IV_Analyses for each folder
-            os.system(f'python3 ../../PDS/scripts/iv_analysis.py --dir "{dir}/{folder}" > {dir}/{folder}/log.txt') # Execute IV_Analyses for each folder
+            os.system(f'python3 ../../../PDS/scripts/iv_analysis.py --dir "{dir}/{folder}" > {dir}/{folder}/log.txt') # Execute IV_Analyses for each folder
 
 
 if __name__ == "__main__":

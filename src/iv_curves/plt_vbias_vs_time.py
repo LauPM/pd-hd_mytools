@@ -31,8 +31,8 @@ for label in labels:
                              xaxis=dict(tickangle=45),
                              font=dict(size=10))
         i += 1
-    fig_px.write_image(f'../images/iv_curves/plot_{label}.png')
-    fig_px.write_html(f'../images/iv_curves/plot_{label}.html')
+    fig_px.write_image(f'../../images/iv_curves/plot_{label}.png')
+    fig_px.write_html(f'../../images/iv_curves/plot_{label}.html')
 
 # plt.scatter(df['Folder'], df['Vdb(Suggested)'])
 # plt.xlabel('File')
