@@ -4,9 +4,11 @@ from matplotlib.backends.backend_pdf import PdfPages
 
 @click.command()
 @click.option("--dir", default = '/eos/experiment/neutplatform/protodune/experiments/ProtoDUNE-II/PDS_Commissioning/ivcurves/')
-def main(dir):
+@click.option("--day", default = 'ALL')
+def main(dir,day):
     print(f'The selected directory to look for data folders is: {dir}')
-    list_folders = os.listdir(f'{dir}')
+    if day == "ALL": list_folders = os.listdir(f'{dir}')
+    else: list_folders = [day]
     for folder in list_folders:
         if not os.path.isdir(f'{dir}{folder}') or "TMP" in folder:
             print('\033[91m'+'Not considering '+folder+'\033[0m') 
