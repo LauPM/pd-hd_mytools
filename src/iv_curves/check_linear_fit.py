@@ -10,7 +10,6 @@ def main(dir):
     df = pd.DataFrame(columns=['Filename', 'Slope', 'Intercept'])
 
     for folder in list_folders:
-# read the log.txt file inside each folder and check if the beggining of each lines is AFE or not:
         if not os.path.isdir(f'{dir}{folder}') or "TMP" in folder:
             print('\033[91m'+'Not considering '+folder+'\033[0m') 
             continue
@@ -20,11 +19,14 @@ def main(dir):
             if "log.txt" in list_files:
                 file = open(f'{dir}{folder}/log.txt', 'r')
                 lines = file.readlines()
-                ips_chs = {}; ips_dirs = ""; channels = ""; filenames = []
+                ips_chs = {}; ips_dirs = ""; channels = ""; 
+                filenames = []; ips = []
                 for line in lines:
                     if line.startswith(" 10."): 
+
                         filename = line.split(" ")[2]
                         filenames.append(filename)
+                        ips.append(line.split(" ")[1].split(".")[-1])
                         # print(f'Filename: {filename}')
                         ips_dirs = line.split(" ")[1].split(".")[-1]
                         if ips_dirs not in ips_chs.keys():
@@ -33,14 +35,7 @@ def main(dir):
                         channels = filename.split(".")[0].split("_")[-1]
                         if channels not in ips_chs.values():
                             ips_chs[ips_dirs].append(channels) 
-                        # afe = filename.split(".")[0].split("_")[3]
-                        # if channels not in ips_chs.values():
-                        #     ips_chs[ips_dirs].append(channels)    
-                            # print(f'Channel: {channels}')
-                        # print(f'IPS {ips_dirs}, CHS : {channels}')
-                    # if line.startswith("AFE"):
-                    #     afe = line.split(":")[1].strip()
-                    #     print(f'Afe: {afe}')
+
                 i = 0
                 for line in lines:
                     # print(f'IPS {ips_dirs}, CHS : {channels}, {ips_chs}')
@@ -53,6 +48,7 @@ def main(dir):
                         conversion = [num_str for num_str in conversion_str.split()]
                         
                         filename = filenames[i].split(":")[-1].split(".")[0]
+                        ip = ips[i]
                         apa = filename.split("_")[1]
                         afe = filename.split("_")[3]
                         chs = filename.split("_")[5]
@@ -62,12 +58,13 @@ def main(dir):
                         print(f'\nFolder: {folder}')
                         print(f'Filename: {filename}')
                         print(f'APA: {apa}')
+                        print(f'IP: {ip}')
                         print(f'AFE: {afe}')
                         print(f'CHS: {chs}')
                         print(f'Slope: {slope}')
                         print(f'Intercept: {intercept}')
 
-                        df = pd.concat((df,pd.DataFrame({'Folder': [folder],'Filename': [filename],
+                        df = pd.concat((df,pd.DataFrame({'Folder': [folder], 'IP':[ip],'Filename': [filename],
                                                          'APA':[apa], 'AFE':[afe], 'CHS':[chs], 
                                                          'Slope':[slope], 'Intercept':[intercept]})), ignore_index=True)
                         # print(df)

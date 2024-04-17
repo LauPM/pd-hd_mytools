@@ -12,9 +12,9 @@ def main(dir):
     for folder in list_folders:
         try: 
             df_saved = pd.read_csv('output.txt',sep='\t',header=0)
-            print(type(df_saved)) #si se queda vacio se lia
+            # print(type(df_saved)) #si se queda vacio se lia
             all_data = df_saved
-            print(list(set(df_saved["Folder"].values)))
+            # print(list(set(df_saved["Folder"].values)))
             if folder in list(set(df_saved["Folder"].values)):
                 print('\033[35m'+ 'Already analysed '+folder+ '\033[0m')
                 continue
@@ -32,7 +32,7 @@ def main(dir):
                 print(f'Output file found!')
                 df = pd.read_csv(f'{dir}{folder}/breakdown_output.txt',sep='\t',header=None)
                 df = df.drop(df.index[0])
-                df.columns = ['IP', 'File', 'SIPM', 'Status', 'Vdb(Suggested)', 'Vdbd(Pulse)', 'Vbd(Poly)']
+                df.columns = ['IP', 'File', 'SIPM', 'Status', 'Vbd(Suggested)', 'Vbd(Pulse)', 'Vbd(Poly)']
                 df['Folder'] = folder
                 all_data = pd.concat([all_data,df], ignore_index=True)  # Append df to all_data
             else:
