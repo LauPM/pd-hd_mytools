@@ -35,9 +35,9 @@ def main(dir):
                 df.columns = ['IP', 'File', 'SIPM', 'Status', 'Vbd(Suggested)', 'Vbd(Pulse)', 'Vbd(Poly)']
                 df['Folder'] = folder
                 all_data = pd.concat([all_data,df], ignore_index=True)  # Append df to all_data
-            elif not "quality_checks.pdf" in list_files:
-                print('\033[92m Generating quality_checks.pdf with plots!\033[0m')
-                os.system(f'python plt_ivcurves_quality --dir {dir} --day {folder}') # Execute IV_Analyses for each folder
+            if not "quality_checks.pdf" in list_files:
+                print('\033[92m'+'Generating quality_checks.pdf with plots!'+'\033[0m')
+                os.system(f'python plt_ivcurves_quality.py --dir {dir} --day {folder}') # Execute IV_Analyses for each folder
 
             else:
                 print('\033[91m'+'Not output txt file'+'\033[0m') 
